@@ -433,6 +433,289 @@
             }
         </script>
     <!--CHECKUP SECTION END-->
+    <!--CHAT BOT -->
+    <!-- Chatbot Section -->
+ <section class="bg-gradient-to-bl from bg-purple-50">
+
+
+    <div class="w-full flex justify-center items-center text-center mt-4">
+        <h1 class="text-5xl font-bold text-purple-600 ">WELCOME TO MEDI BOT</h1>
+    </div>
+    <section class="bg-white rounded-xl shadow-lg p-8 max-w-lg mx-auto my-12 border border-purple-200">
+        
+        <!-- Heading -->
+        <h2 class="text-3xl font-bold text-center text-purple-600 mb-6 border-b-4 border-purple-500 pb-2">MEDI BOT</h2>
+        <!-- Chat messages container -->
+        <div id="chatMessages" class="chat-messages h-80 overflow-y-auto bg-purple-50 border border-purple-100 rounded-lg p-4 mb-6">
+            <!-- Initial bot message -->
+            <div class="mb-3 flex justify-start">
+                <div class="bg-purple-600 text-white rounded-lg py-2 px-4 max-w-xs">
+                    Hello! I'm Medi Bot, here to assist with your health questions. What’s on your mind?
+                </div>
+            </div>
+        </div>
+        <!-- Chat input form -->
+        <form id="chatForm" class="flex gap-3">
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Type your health question..."
+                class="flex-1 p-3 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-gray-800 font-medium"
+            />
+            <button
+                type="submit"
+                class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold shadow-md hover:shadow-purple-300"
+            >
+                Send
+            </button>
+        </form>
+    
+        <!-- JavaScript for chatbot functionality -->
+        <script>
+            // Get DOM elements
+            const chatForm = document.getElementById('chatForm');
+            const userInput = document.getElementById('userInput');
+            const chatMessages = document.getElementById('chatMessages');
+    
+            // Function to add a message to the chat
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('mb-3', 'flex', sender === 'user' ? 'justify-end' : 'justify-start');
+                
+                const messageBubble = document.createElement('div');
+                messageBubble.classList.add(
+                    sender === 'user' ? 'bg-blue-500' : 'bg-purple-600',
+                    'text-white',
+                    'rounded-lg',
+                    'py-2',
+                    'px-4',
+                    'max-w-xs'
+                );
+                messageBubble.textContent = text;
+    
+                messageDiv.appendChild(messageBubble);
+                chatMessages.appendChild(messageDiv);
+    
+                // Scroll to the bottom of the chat
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+    
+            // Function to get a bot response with health-related advice
+            function getBotResponse(input) {
+                input = input.toLowerCase();
+    
+                // Handle short keywords by mapping to relevant topics or giving general advice
+                if (input === 'stress') {
+                    return 'Stress can be tough! To manage it, try deep breathing exercises, regular physical activity, meditation, or hobbies you enjoy. Also, ensure you’re getting enough sleep and consider talking to a counselor if it feels overwhelming.';
+                } else if (input === 'depress' || input === 'depression') {
+                    return 'Depression can show as persistent sadness, loss of interest in activities, changes in appetite or sleep, fatigue, and difficulty concentrating. If you’re feeling this way, I recommend speaking with a mental health professional for support.';
+                } else if (input === 'vomiting') {
+                    return 'Vomiting can be caused by food poisoning, infections, motion sickness, or other issues. Stay hydrated with small sips of water or electrolyte drinks, avoid solid food for a bit, and rest. If it persists or you have severe symptoms like dehydration, see a doctor.';
+                } else if (input === 'anxiety') {
+                    return 'Anxiety symptoms can include excessive worry, restlessness, rapid heartbeat, sweating, and trouble sleeping. Breathing exercises and mindfulness can help, but if it’s affecting your daily life, consider speaking with a therapist.';
+                } else if (input === 'diabetes') {
+                    return 'Symptoms of diabetes include increased thirst, frequent urination, fatigue, blurred vision, and slow-healing sores. If you notice these, get a blood sugar test and consult a doctor for proper diagnosis and management.';
+                } else if (input === 'sleep') {
+                    return 'To improve sleep quality, maintain a regular sleep schedule, limit screen time before bed, create a calming bedtime routine, and avoid caffeine or heavy meals late in the day. If sleep issues persist, consult a doctor.';
+                } else if (input === 'headache') {
+                    return 'For a headache, try drinking water, resting in a quiet, dark room, applying a cold compress to your forehead, and taking an over-the-counter pain reliever like ibuprofen. If headaches persist or worsen, see a doctor.';
+                } else if (input === 'flu') {
+                    return 'Flu symptoms typically include fever, chills, cough, sore throat, body aches, fatigue, and sometimes nausea. Rest, stay hydrated, and consider antiviral medication if prescribed by a doctor.';
+                } else if (input === 'covid') {
+                    return 'Common symptoms of COVID-19 include fever, cough, shortness of breath, fatigue, loss of taste or smell, and body aches. If you’re experiencing these, please consider getting tested and consult a healthcare provider for guidance.';
+                }
+    
+                // Existing health-related questions
+                if (input.includes('symptoms of covid-19')) {
+                    return 'Common symptoms of COVID-19 include fever, cough, shortness of breath, fatigue, loss of taste or smell, and body aches. If you’re experiencing these, please consider getting tested and consult a healthcare provider for guidance.';
+                } else if (input.includes('stomach hurt') || input.includes('why does my stomach hurt')) {
+                    return 'Stomach pain can be caused by various issues like indigestion, gas, infections, or more serious conditions like appendicitis. Try eating smaller meals, staying hydrated, and avoiding spicy foods. If the pain persists or worsens, please see a doctor.';
+                } else if (input.includes('symptoms of depression')) {
+                    return 'Symptoms of depression may include persistent sadness, loss of interest in activities, changes in appetite or sleep, fatigue, and difficulty concentrating. If you’re feeling this way, I recommend speaking with a mental health professional for support.';
+                } else if (input.includes('how to lose weight')) {
+                    return 'Losing weight involves a balanced diet, regular exercise, and hydration. Focus on whole foods like vegetables, lean proteins, and whole grains, and aim for at least 30 minutes of activity daily. Consult a dietitian for a personalized plan.';
+                } else if (input.includes('symptoms of anxiety')) {
+                    return 'Anxiety symptoms can include excessive worry, restlessness, rapid heartbeat, sweating, and trouble sleeping. Breathing exercises and mindfulness can help, but if it’s affecting your daily life, consider speaking with a therapist.';
+                } else if (input.includes('mental health issues be cured') || input.includes('can mental health issues be cured')) {
+                    return 'Many mental health issues can be managed effectively with therapy, medication, lifestyle changes, or a combination of these. While "cured" depends on the condition, many people lead fulfilling lives with proper support. Consult a psychiatrist for guidance.';
+                } else if (input.includes('improve mental health')) {
+                    return 'To improve mental health, try regular exercise, a balanced diet, good sleep, mindfulness practices like meditation, and staying connected with loved ones. Professional help from a therapist can also make a big difference.';
+                } else if (input.includes('symptoms of diabetes')) {
+                    return 'Symptoms of diabetes include increased thirst, frequent urination, fatigue, blurred vision, and slow-healing sores. If you notice these, get a blood sugar test and consult a doctor for proper diagnosis and management.';
+                } else if (input.includes('reduce stress') || input.includes('how to reduce stress')) {
+                    return 'To reduce stress, try deep breathing exercises, regular physical activity, meditation, or hobbies you enjoy. Also, ensure you’re getting enough sleep and consider talking to a counselor if stress feels overwhelming.';
+                } else if (input.includes('pharmacy close') || input.includes('what time does the pharmacy close')) {
+                    return 'Pharmacy hours vary by location. I recommend checking the specific pharmacy’s website or calling them directly. Many close around 6-9 PM, but some are open 24/7.';
+                } else if (input.includes('get rid of a headache') || input.includes('how to get rid of a headache')) {
+                    return 'For a headache, try drinking water, resting in a quiet, dark room, applying a cold compress to your forehead, and taking an over-the-counter pain reliever like ibuprofen. If headaches persist or worsen, see a doctor.';
+                } else if (input.includes('symptoms of the flu')) {
+                    return 'Flu symptoms typically include fever, chills, cough, sore throat, body aches, fatigue, and sometimes nausea. Rest, stay hydrated, and consider antiviral medication if prescribed by a doctor.';
+                } else if (input.includes('improve sleep') || input.includes('how to improve sleep')) {
+                    return 'To improve sleep, maintain a regular sleep schedule, limit screen time before bed, create a calming bedtime routine, and avoid caffeine or heavy meals late in the day. If sleep issues persist, consult a doctor.';
+                } else if (input.includes('symptoms of high blood pressure')) {
+                    return 'High blood pressure often has no obvious symptoms, which is why it’s called a "silent killer." Some may experience headaches, dizziness, or nosebleeds. Regular checkups and monitoring are key—consult a doctor for advice.';
+                }
+    
+                // New health-related questions
+                if (input.includes('how long is strep throat contagious')) {
+                    return 'Strep throat is typically contagious until you’ve been on antibiotics for at least 24 hours or until fever resolves. Without treatment, it can remain contagious for up to 2-3 weeks. See a doctor for a throat culture and antibiotics if needed.';
+                } else if (input.includes('helps with bloating') || input.includes('what helps with bloating')) {
+                    return 'To reduce bloating, try eating smaller meals, avoiding carbonated drinks, limiting salt intake, and consuming more fiber-rich foods like fruits and vegetables. Peppermint tea or a short walk can also help. If it persists, consult a doctor.';
+                } else if (input.includes('lower cholesterol') || input.includes('how to lower cholesterol')) {
+                    return 'To lower cholesterol, focus on a diet rich in fruits, vegetables, whole grains, and healthy fats like those from nuts and fish. Limit saturated fats and trans fats, exercise regularly, and maintain a healthy weight. Consult a doctor for personalized advice.';
+                } else if (input.includes('causes headaches') || input.includes('what causes headaches')) {
+                    return 'Headaches can be caused by dehydration, stress, lack of sleep, eye strain, hunger, or more serious issues like migraines or tension. Try to identify triggers, stay hydrated, and rest. If frequent or severe, see a doctor.';
+                } else if (input.includes('treat a cold quickly') || input.includes('how to treat a cold quickly')) {
+                    return 'For a cold, rest, stay hydrated with water or herbal teas, use saline nasal sprays, and consider over-the-counter remedies like decongestants. Eat immune-boosting foods like soup with garlic. Colds usually resolve in 7-10 days, but see a doctor if symptoms worsen.';
+                } else if (input.includes('boost the immune system') || input.includes('how to boost the immune system')) {
+                    return 'To boost your immune system, eat a balanced diet with vitamin C (citrus fruits), vitamin D (sunlight or supplements), and zinc (nuts, seeds). Get enough sleep, exercise regularly, stay hydrated, and avoid smoking. Consult a doctor for tailored advice.';
+                } else if (input.includes('signs of dehydration') || input.includes('what are the signs of dehydration')) {
+                    return 'Signs of dehydration include dry mouth, thirst, dark urine, fatigue, dizziness, and headache. Drink water immediately, and consider electrolyte drinks if severe. If symptoms like confusion or rapid heartbeat occur, seek medical help.';
+                } else if (input.includes('improve gut health') || input.includes('how to improve gut health')) {
+                    return 'To improve gut health, eat more fiber-rich foods (fruits, veggies, whole grains), include probiotics (yogurt, kefir), stay hydrated, and reduce processed foods. Regular exercise also helps. Consider consulting a dietitian for a tailored plan.';
+                } else if (input.includes('foods are good for heart health') || input.includes('what foods are good for heart health')) {
+                    return 'Heart-healthy foods include fatty fish (salmon), nuts, seeds, whole grains, fruits like berries, and vegetables like spinach. Limit saturated fats, trans fats, and sodium. A Mediterranean-style diet is often recommended—talk to a doctor for specifics.';
+                } else if (input.includes('manage high blood pressure') || input.includes('how to manage high blood pressure')) {
+                    return 'To manage high blood pressure, reduce salt intake, eat more potassium-rich foods (bananas, spinach), exercise regularly, manage stress through relaxation techniques, and avoid smoking. Monitor your BP and consult a doctor for medication if needed.';
+                } else if (input.includes('symptoms of a stroke') || input.includes('what are the symptoms of a stroke')) {
+                    return 'Stroke symptoms include sudden numbness or weakness (especially on one side), trouble speaking, vision issues, severe headache, and dizziness. Use the FAST acronym: Face drooping, Arm weakness, Speech difficulty, Time to call emergency services immediately.';
+                } else if (input.includes('relieve joint pain') || input.includes('how to relieve joint pain')) {
+                    return 'To relieve joint pain, try gentle exercise like swimming, apply warm or cold compresses, maintain a healthy weight to reduce stress on joints, and consider over-the-counter pain relief. If chronic, see a doctor for therapies or medication.';
+                } else if (input.includes('causes fatigue') || input.includes('what causes fatigue')) {
+                    return 'Fatigue can be caused by lack of sleep, poor diet, dehydration, stress, anemia, thyroid issues, or underlying conditions. Ensure you’re getting enough rest, eating balanced meals, and staying hydrated. If persistent, see a doctor for blood tests.';
+                } else if (input.includes('improve sleep quality') || input.includes('how to improve sleep quality')) {
+                    return 'To improve sleep quality, stick to a consistent sleep schedule, create a dark, cool bedroom environment, avoid screens before bed, and limit caffeine. Relaxation techniques like reading or meditation can help. See a doctor if issues persist.';
+                } else if (input.includes('effects of smoking on health') || input.includes('what are the effects of smoking on health')) {
+                    return 'Smoking increases risks of lung cancer, heart disease, stroke, respiratory issues, and weakens the immune system. It also affects skin, teeth, and overall longevity. Quitting smoking can significantly improve health—consider consulting a doctor for support.';
+                } else if (input.includes('maintain a healthy weight') || input.includes('how to maintain a healthy weight')) {
+                    return 'To maintain a healthy weight, eat a balanced diet with appropriate portions, exercise regularly (at least 150 minutes per week), stay hydrated, and monitor your weight periodically. Consistency is key—consult a dietitian for personalized advice.';
+                } else if (input.includes('benefits of regular exercise') || input.includes('what are the benefits of regular exercise')) {
+                    return 'Regular exercise improves heart health, boosts mood, strengthens muscles and bones, aids weight management, reduces stress, and enhances sleep. Aim for at least 150 minutes of moderate activity weekly, like walking or yoga.';
+                } else if (input.includes('how often should adults get check-ups')) {
+                    return 'Adults should typically get annual check-ups, but frequency depends on age and health. After age 40, screenings for blood pressure, cholesterol, and cancer may increase to every 1-2 years. Consult your doctor for a schedule based on your needs.';
+                } else if (input.includes('vaccinations do adults need') || input.includes('what vaccinations do adults need')) {
+                    return 'Adults need vaccines like the annual flu shot, tetanus (every 10 years), shingles (after 50), pneumococcal (after 65), and potentially HPV or hepatitis vaccines based on risk. Check with your doctor for a personalized vaccination schedule.';
+                } else if (input.includes('recognize food allergies') || input.includes('how to recognize food allergies')) {
+                    return 'Food allergy symptoms include hives, itching, swelling, difficulty breathing, stomach pain, or anaphylaxis after eating certain foods. Keep a food diary to identify triggers and see an allergist for testing if you suspect an allergy.';
+                } else if (input.includes('common symptoms of allergies') || input.includes('what are common symptoms of allergies')) {
+                    return 'Common allergy symptoms include sneezing, runny nose, itchy eyes, rash, or swelling. Food or insect allergies might cause hives or breathing issues. Antihistamines can help, but see a doctor if symptoms are severe or persistent.';
+                } else if (input.includes('stress affect physical health') || input.includes('how does stress affect physical health')) {
+                    return 'Chronic stress can lead to headaches, high blood pressure, heart issues, weakened immunity, and digestive problems. Managing stress through exercise, mindfulness, and sleep is crucial. If overwhelming, seek professional support.';
+                } else if (input.includes('best way to treat acne') || input.includes('what is the best way to treat acne')) {
+                    return 'To treat acne, wash your face twice daily with a gentle cleanser, use over-the-counter treatments like benzoyl peroxide or salicylic acid, avoid touching your face, and keep skin hydrated. For severe acne, see a dermatologist for prescription options.';
+                } else if (input.includes('prevent heart disease') || input.includes('how can i prevent heart disease')) {
+                    return 'To prevent heart disease, eat a heart-healthy diet (low in saturated fats, high in fiber), exercise regularly, avoid smoking, manage stress, and monitor blood pressure and cholesterol. Regular check-ups with a doctor can help catch risks early.';
+                } else if (input.includes('risks of obesity') || input.includes('what are the risks of obesity')) {
+                    return 'Obesity increases risks of heart disease, diabetes, high blood pressure, stroke, joint issues, and certain cancers. It can also affect mental health. Maintaining a healthy diet and staying active can help—consult a doctor for a plan.';
+                } else if (input.includes('manage asthma symptoms') || input.includes('how to manage asthma symptoms')) {
+                    return 'To manage asthma, use prescribed inhalers, avoid triggers like smoke or pollen, monitor symptoms with a peak flow meter, and have an action plan. Stay active but pace yourself, and see a doctor regularly for adjustments to your treatment.';
+                } else if (input.includes('recommended daily water intake') || input.includes('what is the recommended daily water intake')) {
+                    return 'Daily water intake varies, but a general guideline is about 8 cups (2 liters) for adults. Needs increase with activity, heat, or illness. Listen to your thirst and aim for pale yellow urine as an indicator of good hydration.';
+                } else if (input.includes('reduce cholesterol naturally') || input.includes('how to reduce cholesterol naturally')) {
+                    return 'To reduce cholesterol naturally, eat foods high in soluble fiber (oats, beans), include healthy fats (avocados, olive oil), exercise regularly, and avoid smoking. Plant sterols and nuts can also help. Check with a doctor for progress.';
+                } else if (input.includes('signs of high blood sugar') || input.includes('what are the signs of high blood sugar')) {
+                    return 'Signs of high blood sugar include increased thirst, frequent urination, fatigue, blurred vision, and headaches. If you experience these, monitor your levels and consult a doctor, especially if you have diabetes or risk factors.';
+                } else if (input.includes('improve my flexibility') || input.includes('how can i improve my flexibility')) {
+                    return 'To improve flexibility, incorporate daily stretching routines, practice yoga, warm up before stretching, and stay consistent. Focus on major muscle groups like hamstrings and shoulders. A physical therapist can guide you if needed.';
+                } else if (input.includes('healthy diet plan for weight loss') || input.includes('what is a healthy diet plan for weight loss')) {
+                    return 'A healthy weight loss diet includes lean proteins (chicken, fish), plenty of vegetables, whole grains, and healthy fats (avocado, nuts) in controlled portions. Limit sugars and processed foods. Consult a dietitian for a tailored plan.';
+                } else if (input.includes('prevent osteoporosis') || input.includes('how to prevent osteoporosis')) {
+                    return 'To prevent osteoporosis, ensure adequate calcium (dairy, leafy greens) and vitamin D (sunlight, supplements), do weight-bearing exercises like walking, avoid smoking, and limit alcohol. Bone density tests after 50 can help—talk to your doctor.';
+                } else if (input.includes('symptoms of thyroid problems') || input.includes('what are the symptoms of thyroid problems')) {
+                    return 'Thyroid problem symptoms vary: hypothyroidism includes fatigue, weight gain, cold intolerance; hyperthyroidism includes weight loss, anxiety, heat intolerance. Both may cause hair loss or irregular periods. See a doctor for blood tests if suspected.';
+                } else if (input.includes('caffeine affect health') || input.includes('how does caffeine affect health')) {
+                    return 'Caffeine can boost alertness and mood but may cause anxiety, insomnia, or increased heart rate in excess. It’s safe in moderation (up to 400 mg daily for most adults). If sensitive, reduce intake and monitor effects with your doctor.';
+                } else if (input.includes('best exercises for seniors') || input.includes('what are the best exercises for seniors')) {
+                    return 'Best exercises for seniors include walking, swimming, chair yoga, and resistance band training to improve strength, balance, and flexibility. Always start slow and consult a doctor or physical therapist for safe routines.';
+                } else if (input.includes('improve my cardiovascular health') || input.includes('how can i improve my cardiovascular health')) {
+                    return 'To improve cardiovascular health, do aerobic exercises like brisk walking or cycling, eat heart-healthy foods (fatty fish, nuts), avoid smoking, manage stress, and monitor blood pressure and cholesterol. Regular check-ups are key.';
+                } else if (input.includes('healthy blood pressure reading') || input.includes('what is considered a healthy blood pressure reading')) {
+                    return 'A healthy blood pressure reading is typically around 120/80 mmHg. Readings consistently above 130/80 may indicate hypertension. Monitor regularly and consult a doctor if your numbers are consistently high or low.';
+                } else if (input.includes('treat a urinary tract infection') || input.includes('how to recognize and treat a urinary tract infection')) {
+                    return 'UTI symptoms include burning during urination, frequent urges to pee, cloudy urine, or pelvic pain. Drink lots of water, avoid irritants like caffeine, and see a doctor for antibiotics. Untreated UTIs can lead to kidney issues.';
+                } else if (input.includes('effective ways to quit smoking') || input.includes('what are effective ways to quit smoking')) {
+                    return 'To quit smoking, set a quit date, use nicotine replacement therapies (gum, patches), seek support groups or counseling, avoid triggers, and stay active. Consult a doctor for medications like bupropion if needed.';
+                } else if (input.includes('alcohol consumption affect health') || input.includes('how does alcohol consumption affect health')) {
+                    return 'Excessive alcohol can harm the liver (cirrhosis), heart (high BP), and increase cancer risks. Moderate drinking (up to 1 drink/day for women, 2 for men) may have benefits, but zero is healthiest. Seek help if dependency is an issue.';
+                } else if (input.includes('sunscreen use and skin cancer prevention') || input.includes('what should i know about sunscreen use')) {
+                    return 'Use broad-spectrum sunscreen (SPF 30+) daily, even on cloudy days, and reapply every 2 hours if outdoors. Wear protective clothing and avoid peak sun (10 AM-4 PM). Regular skin checks can help catch skin cancer early.';
+                } else if (input.includes('reduce my risk of developing cancer') || input.includes('how can i reduce my risk of developing cancer')) {
+                    return 'To reduce cancer risk, avoid smoking, limit alcohol, eat a diet rich in fruits and veggies, exercise regularly, maintain a healthy weight, use sunscreen, and get screenings (e.g., mammograms). Genetics also play a role—talk to your doctor.';
+                } else if (input.includes('benefits of probiotics for gut health') || input.includes('what are the benefits of probiotics')) {
+                    return 'Probiotics can improve gut health by balancing gut bacteria, aiding digestion, reducing bloating, and boosting immunity. Found in yogurt, kefir, and supplements, they’re helpful for IBS or after antibiotics. Consult a doctor for recommendations.';
+                } else if (input.includes('aging affect physical health') || input.includes('how does aging affect physical health')) {
+                    return 'Aging can lead to muscle loss, reduced bone density, slower metabolism, and increased risk of chronic diseases like heart disease or arthritis. Staying active, eating well, and regular check-ups can help manage these changes.';
+                } else if (input.includes('importance of fiber in the diet') || input.includes('what is the importance of fiber')) {
+                    return 'Fiber aids digestion, prevents constipation, lowers cholesterol, controls blood sugar, and supports weight management. Aim for 25-30 grams daily from sources like whole grains, fruits, veggies, and legumes.';
+                } else if (input.includes('improve my posture and prevent back pain') || input.includes('how can i improve my posture')) {
+                    return 'To improve posture, strengthen core muscles with exercises like planks, sit/stand straight, use ergonomic furniture, and stretch regularly. Avoid slouching and take breaks if sitting long. A physical therapist can help if pain persists.';
+                } else if (input.includes('causes of digestive issues like ibs') || input.includes('what are common causes of digestive issues')) {
+                    return 'IBS and digestive issues can be caused by stress, poor diet, food intolerances (e.g., lactose), infections, or gut bacteria imbalance. Keep a food diary, eat slowly, and see a gastroenterologist for diagnosis and management.';
+                } else if (input.includes('how often should i exercise for optimal health benefits')) {
+                    return 'For optimal health, aim for at least 150 minutes of moderate aerobic exercise (like brisk walking) per week, plus muscle-strengthening exercises twice a week. Daily movement is ideal—consistency matters more than intensity.';
+                } else if (input.includes('lifestyle changes can help manage chronic conditions') || input.includes('what lifestyle changes can help manage chronic conditions')) {
+                    return 'To manage chronic conditions, adopt a balanced diet, exercise regularly, manage stress, quit smoking, limit alcohol, get enough sleep, and adhere to medication plans. Work with your doctor to tailor these changes to your condition.';
+                }
+    
+                // Basic conversational responses
+                else if (input.includes('hello') || input.includes('hi')) {
+                    return 'Hello! I’m Medi Bot, here to help with any health questions you might have. What’s on your mind?';
+                } else if (input.includes('bye')) {
+                    return 'Take care! If you have more health questions, feel free to come back!';
+                } else {
+                    return 'I’m not sure about that, but I’m happy to help with health topics! Try asking about symptoms, stress, sleep, or other health concerns.';
+                }
+            }
+    
+            // Handle form submission
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Prevent form from refreshing the page
+    
+                const userMessage = userInput.value.trim();
+                if (!userMessage) return; // Ignore empty messages
+    
+                // Add user message to chat
+                addMessage(userMessage, 'user');
+    
+                // Simulate bot response after a short delay
+                setTimeout(() => {
+                    const botResponse = getBotResponse(userMessage);
+                    addMessage(botResponse, 'bot');
+                }, 500);
+    
+                // Clear the input field
+                userInput.value = '';
+            });
+        </script>
+    </section>
+    </section>
+    
+    <!-- Optional inline styles for scrollbar and MediMinds-specific customizations -->
+    <style>
+        /* Ensure Poppins font is applied (requires Google Fonts import in your page) */
+        section {
+            font-family: 'Poppins', sans-serif;
+        }
+    
+        /* Scrollbar styling */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: #9333EA; /* Purple shade similar to MediMinds */
+            border-radius: 3px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background-color: #7E22CE; /* Darker purple on hover */
+        }
+    
+        /* Custom shadow to match MediMinds theme */
+        .shadow-purple-300 {
+            box-shadow: 0 10px 15px -3px rgba(147, 51, 234, 0.1), 0 4px 6px -4px rgba(147, 51, 234, 0.1);
+        }
+    </style>
+        <!--CHAT BOT END -->
+    <!--CHAT BOT END-->
     
     <button id="prev-btn" class="nav-btn hidden" onclick="prevStep()">← Previous</button>
 
